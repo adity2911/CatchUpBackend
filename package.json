@@ -19,7 +19,6 @@
     "randomstring": "^1.2.2"
   },
   "devDependencies": {
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.19"
   },
   "engines": {
