@@ -7,7 +7,7 @@ const createMeet = require("./routes/createMeet/createMeet.router");
 const verifyMeet = require("./routes/verifyMeet/verifyMeet.router");
 
 app.use(cors({ origin: "http://localhost:8000" }));
-app.use(morgan("combined"));
+
 app.use(express.json());
 
 app.use("/createNew", createMeet);
