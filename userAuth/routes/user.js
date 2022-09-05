@@ -55,9 +55,9 @@ router.post("/register", async (req, res, next) => {
           );
           res.setHeader("Content-Type", "Application/JSON");
           res.json({
-            name: user.username,
+            name: user.email,
             token: token,
-            profilePic: "",
+            // profilePic: "",
             // message: "Successfully registered",
           });
           // console.log(user);
@@ -82,82 +82,84 @@ router.post("/login", (req, res, next) => {
         user: user,
       });
     }
+    console.log(user);
     req.login(user, { session: false }, (err) => {
       if (err) {
         res.send(err);
       }
       const token = jwt.sign(user, "your_jwt_secret");
-      return res.json({ user, token });
+      console.log(user);
+      return res.json({ name: user.username, token: token });
     });
   })(req, res);
 });
 
-router.post("/googleLogin", async (req, res, next) => {
-  const { tokenId } = req.body;
-  // recieved from frontend
+// router.post("/googleLogin", async (req, res, next) => {
+//   const { tokenId } = req.body;
+//   // recieved from frontend
 
-  client
-    .verifyIdToken({
-      idToken: tokenId,
-      requiredAudience: process.env.CLIENT_ID,
-    })
-    .then((response) => {
-      const { email_verified, name, email } = response.payload;
-      console.log(response.payload);
-      if (email_verified) {
-        User.findOne({ email }).exec((err, user) => {
-          if (err) {
-            return res.status(400).json({
-              error: "Something Went Wrong",
-            });
-          } else {
-            if (user) {
-              //exists in database
-              const token = jwt.sign(
-                { _id: user._id },
-                process.env.JWT_SECRET,
-                { expiresIn: "10d" }
-              );
-              const { _id, email, name } = user;
+//   client
+//     .verifyIdToken({
+//       idToken: tokenId,
+//       requiredAudience: process.env.CLIENT_ID,
+//     })
+//     .then((response) => {
+//       const { email_verified, name, email } = response.payload;
+//       console.log(response.payload);
+//       if (email_verified) {
+//         User.findOne({ email }).exec((err, user) => {
+//           if (err) {
+//             return res.status(400).json({
+//               error: "Something Went Wrong",
+//             });
+//           } else {
+//             if (user) {
+//               //exists in database
+//               const token = jwt.sign(
+//                 { _id: user._id },
+//                 process.env.JWT_SECRET,
+//                 { expiresIn: "10d" }
+//               );
+//               const { _id, email, name } = user;
 
-              res.json({
-                token,
-                user: { _id, email, name },
-              });
-            } else {
-              let password = email + process.env.JWT_SECRET;
-              //does not exist in database
-              let newUser = new User({
-                email: email,
-                username: name,
-                password: password,
-              });
+//               res.json({
+//                 token,
+//                 user: { _id, email, name },
+//               });
+//             } else {
+//               let password = email + process.env.JWT_SECRET;
+//               //does not exist in database
+//               let newUser = new User({
+//                 email: email,
+//                 username: name,
+//                 password: password,
+//               });
 
-              newUser.save((err, user) => {
-                if (err) {
-                  console.log(err);
-                  return res.status(400).json({
-                    error: "Something Went Wrong",
-                  });
-                } else {
-                  const token = jwt.sign(
-                    { _id: user._id },
-                    process.env.JWT_SECRET,
-                    { expiresIn: "10d" }
-                  );
-                  const { _id, email, name } = user;
-                  res.json({
-                    token,
-                    user: { _id, email, name },
-                  });
-                }
-              });
-            }
-          }
-        });
-      }
-    });
-  console.log();
-});
+//               newUser.save((err, user) => {
+//                 if (err) {
+//                   console.log(err);
+//                   return res.status(400).json({
+//                     error: "Something Went Wrong",
+//                   });
+//                 } else {
+//                   const token = jwt.sign(
+//                     { _id: user._id },
+//                     process.env.JWT_SECRET,
+//                     { expiresIn: "10d" }
+//                   );
+//                   const { _id, email, name } = user;
+//                   res.json({
+//                     token,
+//                     user: { _id, email, name },
+//                   });
+//                 }
+//               });
+//             }
+//           }
+//         });
+//       }
+//     });
+//   console.log();
+// });
 
 module.exports = router;
