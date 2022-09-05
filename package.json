@@ -1,7 +1,6 @@
 {
   "name": "catupapp",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon start",
@@ -16,12 +15,31 @@
     "express": "^4.18.1",
     "helmet": "^6.0.0",
     "mongoose": "^6.5.4",
-    "randomstring": "^1.2.2"
+    "randomstring": "^1.2.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "google-auth-library": "^8.5.1",
+    "http": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.7.0",
+    "morgan": "^1.10.0",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
   },
   "engines": {
     "node": "18.6.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adity2911/CatchUpBackend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adity2911/CatchUpBackend/issues"
+  },
+  "homepage": "https://github.com/adity2911/CatchUpBackend#readme",
+  "description": ""
 }

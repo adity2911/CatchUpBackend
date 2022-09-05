@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const mongoPass = process.env.mongoPass;
-const mongoose_url = `mongodb+srv://Admin:${mongoPass}@catchupapp.yag6s19.mongodb.net/?retryWrites=true&w=majority`;
+const mongoose_url = `mongodb+srv://Admin:${process.env.mongoPass}@catchupapp.yag6s19.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.connection.once("open", () => {
-  console.log("Mongoose Connection stablished");
+  console.log("Mongoose Connection to MeetDatabase stablished");
 });
 
 mongoose.connection.on("error", (e) => {
