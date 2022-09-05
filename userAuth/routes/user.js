@@ -55,11 +55,12 @@ router.post("/register", async (req, res, next) => {
           );
           res.setHeader("Content-Type", "Application/JSON");
           res.json({
-            user: user,
+            name: user.username,
             token: token,
-            message: "Successfully registered",
+            profilePic: "",
+            // message: "Successfully registered",
           });
-          console.log(user);
+          // console.log(user);
         })
         .catch((err) => {
           res.status(400).json({ message: "Unexpected server error" });
