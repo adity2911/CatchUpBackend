@@ -15,3 +15,6 @@ const meetSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("meets", meetSchema);
+/* 
+This for Hacktober Fest 2022
+*/
