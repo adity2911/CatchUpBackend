@@ -10,6 +10,7 @@ const authRoute = require("./userAuth/routes/user");
 app.use(cors({ origin: "http://localhost:8000" }));
 app.use(express.json());
 
+//comment kardiya bro
 app.use("/createNew", createMeet);
 app.use("/verify", verifyMeet);
 app.use("/users", authRoute);
